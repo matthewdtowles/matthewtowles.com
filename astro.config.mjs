@@ -28,6 +28,12 @@ export default defineConfig({
           rehypeMermaid,
           {
             strategy: 'inline-svg',
+            // Labels as SVG text rather than embedded HTML, so the stylesheet
+            // can recolor them per theme.
+            mermaidConfig: {
+              theme: 'neutral',
+              flowchart: { htmlLabels: false, curve: 'basis' },
+            },
             ...(chromeChannel ? { launchOptions: { channel: chromeChannel } } : {}),
           },
         ],

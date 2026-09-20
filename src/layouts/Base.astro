@@ -1,9 +1,15 @@
 ---
+import '../styles/global.css';
+import { site } from '../config/site';
+
 interface Props {
   title: string;
   description?: string;
 }
-const { title, description } = Astro.props;
+
+const { title, description = site.lede } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const isHome = Astro.url.pathname === '/';
 ---
 
 <html lang="en">
@@ -11,10 +17,49 @@ const { title, description } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600&family=IBM+Plex+Sans:wght@400;600&display=swap"
+    />
   </head>
   <body>
-    <slot />
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="page">
+      <header class="masthead">
+        {isHome ? (
+          <span class="wordmark">{site.name}</span>
+        ) : (
+          <a class="wordmark" href="/">{site.name}</a>
+        )}
+        <nav class="nav" aria-label="Main">
+          <a href="/#work">Work</a>
+          <a href="/resume/">Resume</a>
+          <a href={`mailto:${site.email}`}>Contact</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <slot />
+      </main>
+
+      <footer class="colophon">
+        <span>{site.name}</span>
+        <span>
+          Built with Astro, served from CloudFront.
+          <a href="https://github.com/matthewdtowles/matthewtowles.com">Source</a>
+        </span>
+      </footer>
+    </div>
   </body>
 </html>

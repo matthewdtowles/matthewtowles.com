@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, socials } from '../config/site';
+import { summary, roles, education, internalTools } from '../data/resume';
+---
+
+<Base title={`Resume, ${site.name}`} description={summary}>
+  <section style="margin-top: 4rem;">
+    <p class="eyebrow">Resume</p>
+    <h1>{site.name}</h1>
+    <p class="lede">{summary}</p>
+    <ul class="linkrow" style="margin-top: 1.5rem;">
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      {socials.map((s) => <li><a href={s.url}>{s.label}</a></li>)}
+    </ul>
+  </section>
+
+  <div class="spine">
+    <section class="node" data-live>
+      <p class="eyebrow">Experience</p>
+      {roles.map((role) => (
+        <div class="role">
+          <div class="role-head">
+            <h3>{role.company}</h3>
+            <span class="meta">{role.start} to {role.end}</span>
+          </div>
+          <p class="stack">{role.title}</p>
+          {role.summary && <p>{role.summary}</p>}
+          <ul>
+            {role.highlights.map((h) => (
+              <li><strong>{h.label}.</strong> {h.detail}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section class="node">
+      <p class="eyebrow">Internal tooling</p>
+      <p>
+        Built at Travelers outside assigned work. These are internal, so there is
+        nothing public to link.
+      </p>
+      <ul>
+        {internalTools.map((t) => (
+          <li><strong>{t.name}.</strong> {t.detail}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="node">
+      <p class="eyebrow">Education</p>
+      <ul>
+        {education.map((e) => (
+          <li>
+            <strong>{e.school}.</strong> {e.credential}{e.year ? `, ${e.year}` : ''}
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>

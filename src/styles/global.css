@@ -1,0 +1,466 @@
+/* Tokens. Light is the base; dark redefines only what changes. */
+:root {
+  --bg: #fbfbfa;
+  --surface: #f3f3f0;
+  --ink: #16181c;
+  --ink-muted: #5c6169;
+  --ink-faint: #8b9099;
+  --rule: #dededa;
+  --accent: #2e38c9;
+  --accent-soft: #e8e9fb;
+  /* Amber is reserved for status. It never appears as decoration. */
+  --status: #9a5b00;
+  --status-soft: #f7efe2;
+
+  --font-display: 'IBM Plex Sans Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --measure: 68ch;
+  --gutter: 2.75rem;
+  --page: 62rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101215;
+    --surface: #171a1f;
+    --ink: #e8eaed;
+    --ink-muted: #979da7;
+    --ink-faint: #6d737d;
+    --rule: #272b32;
+    --accent: #9aa0ff;
+    --accent-soft: #1c1f3d;
+    --status: #e0a93f;
+    --status-soft: #2a2317;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+  transition: color 120ms ease, text-decoration-color 120ms ease;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); }
+h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); }
+h3 { font-size: 1.15rem; letter-spacing: -0.005em; }
+
+p { margin: 0 0 1.1em; max-width: var(--measure); }
+
+/* Page frame */
+.page {
+  max-width: var(--page);
+  margin-inline: auto;
+  padding: 0 1.5rem 6rem;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  background: var(--bg);
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--rule);
+}
+
+/* The spine: a hairline rail with a node per section. The site is about data
+   moving through stages, and the rail is that shape. */
+.spine {
+  position: relative;
+  padding-left: var(--gutter);
+}
+
+.spine::before {
+  content: '';
+  position: absolute;
+  left: 0.3125rem;
+  top: 0.75rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+.spine > .node {
+  position: relative;
+}
+
+.spine > .node::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--gutter) + 0.0625rem);
+  top: 0.6em;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--bg);
+  box-shadow: inset 0 0 0 1px var(--ink-faint);
+}
+
+.spine > .node[data-live]::before {
+  background: var(--accent);
+  box-shadow: none;
+}
+
+@media (max-width: 46rem) {
+  .spine { padding-left: 0; }
+  .spine::before { display: none; }
+  .spine > .node::before { display: none; }
+}
+
+/* Eyebrow labels. Mono is the utility voice: labels, metadata, status. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 1rem;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+.status {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--status);
+  background: var(--status-soft);
+  padding: 0.15rem 0.45rem;
+  white-space: nowrap;
+}
+
+section { margin-top: 4.5rem; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+/* Header and footer */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.75rem 0 0;
+  flex-wrap: wrap;
+}
+
+.masthead a { text-decoration: none; }
+
+.wordmark {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  display: flex;
+  gap: 1.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.nav a { color: var(--ink-muted); }
+.nav a:hover { color: var(--accent); }
+
+.colophon {
+  margin-top: 6rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+}
+
+/* Hero */
+.lede {
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  color: var(--ink-muted);
+  max-width: 46ch;
+  margin-top: 1.25rem;
+}
+
+/* Link rows */
+.linkrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+/* Work list */
+.work {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.work > li + li {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.work-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.work-head h3 { font-family: var(--font-display); font-size: 1.5rem; }
+.work-head a { text-decoration: none; }
+.work-head a:hover { color: var(--accent); }
+
+.stack {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--ink-faint);
+  margin-top: 0.4rem;
+}
+
+/* Prose blocks inside project pages */
+.prose h2 { margin-top: 3rem; margin-bottom: 0.9rem; }
+.prose h3 { margin-top: 2rem; margin-bottom: 0.5rem; }
+.prose ul { max-width: var(--measure); }
+.prose li { margin-bottom: 0.35rem; }
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.55rem 0.9rem 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.prose th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+
+/* Diagrams: let them breathe, and keep them scrollable on small screens. */
+.prose p:has(> svg),
+.diagram {
+  overflow-x: auto;
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+}
+
+.prose svg { max-width: 100%; height: auto; display: block; }
+
+/* Code */
+pre {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: 0.85rem 1rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+/* Resume */
+.role + .role {
+  margin-top: 2.25rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.role-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.role-head h3 { font-size: 1.25rem; }
+
+.role ul {
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+  max-width: var(--measure);
+}
+
+.role li { margin-bottom: 0.5rem; }
+
+.role li strong { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mermaid renders to SVG at build time with fixed colors, so the palette is
+   reapplied here. Without this the diagrams keep light fills in dark mode. */
+.prose svg {
+  background: var(--surface) !important;
+  border: 1px solid var(--rule) !important;
+  padding: 1.25rem !important;
+  margin: 2rem 0 !important;
+}
+
+.prose svg .node rect,
+.prose svg .node polygon,
+.prose svg .node circle,
+.prose svg .node path {
+  fill: var(--bg) !important;
+  stroke: var(--ink-faint) !important;
+}
+
+.prose svg .cluster rect {
+  fill: transparent !important;
+  stroke: var(--rule) !important;
+}
+
+.prose svg text,
+.prose svg tspan,
+.prose svg .nodeLabel,
+.prose svg .edgeLabel,
+.prose svg .cluster-label {
+  fill: var(--ink) !important;
+  stroke: none !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.78rem !important;
+}
+
+.prose svg .cluster-label text {
+  fill: var(--ink-muted) !important;
+}
+
+.prose svg .edgePath .path,
+.prose svg path.flowchart-link {
+  stroke: var(--ink-faint) !important;
+  fill: none !important;
+}
+
+.prose svg marker path,
+.prose svg .arrowheadPath {
+  fill: var(--ink-faint) !important;
+  stroke: var(--ink-faint) !important;
+}
+
+.prose svg .edgeLabel rect,
+.prose svg .label-container {
+  fill: var(--surface) !important;
+}
+
+/* Mermaid renders labels as HTML inside foreignObject, so they take color
+   rather than fill. */
+.prose svg foreignObject div,
+.prose svg foreignObject span,
+.prose svg foreignObject p,
+.prose svg .nodeLabel,
+.prose svg .edgeLabel,
+.prose svg .cluster-label {
+  color: var(--ink) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.76rem !important;
+  line-height: 1.4 !important;
+}
+
+.prose svg foreignObject p {
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.prose svg .edgeLabel span,
+.prose svg .edgeLabel p,
+.prose svg .edgeLabel div {
+  background: var(--surface) !important;
+  color: var(--ink-muted) !important;
+}
+
+.prose svg .cluster-label div,
+.prose svg .cluster-label span,
+.prose svg .cluster-label p {
+  color: var(--ink-muted) !important;
+}
