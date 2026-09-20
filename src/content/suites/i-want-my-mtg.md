@@ -1,6 +1,6 @@
 ---
 title: I Want My MTG
-tagline: A four-component system for tracking Magic&colon; The Gathering collections — ingestion, API, mobile, and an MCP server.
+tagline: "A four-component system for tracking Magic: The Gathering collections — ingestion, API, mobile, and an MCP server."
 status: active
 components:
   - i-want-my-mtg-web
