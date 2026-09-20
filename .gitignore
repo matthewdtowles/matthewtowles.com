@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# cdk
+infra/cdk.out/
+infra/node_modules/
