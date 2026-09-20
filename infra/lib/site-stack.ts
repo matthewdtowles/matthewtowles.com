@@ -12,13 +12,20 @@ export interface SiteStackProps extends cdk.StackProps {
   readonly domainName: string;
   readonly hostedZoneId: string;
   readonly githubRepo: string;
+  /**
+   * GitHub now issues OIDC subjects carrying immutable numeric ids, as in
+   * repo:owner@123/name@456:ref:refs/heads/main. Pinning those ids is stricter
+   * than the name based form, because a renamed or recreated repository gets
+   * new ids and stops matching.
+   */
+  readonly githubRepoImmutable: string;
 }
 
 export class SiteStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: SiteStackProps) {
     super(scope, id, props);
 
-    const { domainName, hostedZoneId, githubRepo } = props;
+    const { domainName, hostedZoneId, githubRepo, githubRepoImmutable } = props;
     const wwwDomain = `www.${domainName}`;
 
     const zone = route53.HostedZone.fromHostedZoneAttributes(this, 'Zone', {
@@ -145,7 +152,12 @@ function handler(event) {
       roleName: 'matthewtowles-site-deploy',
       assumedBy: new iam.OpenIdConnectPrincipal(oidcProvider, {
         StringEquals: { 'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com' },
-        StringLike: { 'token.actions.githubusercontent.com:sub': `repo:${githubRepo}:ref:refs/heads/main` },
+        StringLike: {
+          'token.actions.githubusercontent.com:sub': [
+            `repo:${githubRepoImmutable}:ref:refs/heads/main`,
+            `repo:${githubRepo}:ref:refs/heads/main`,
+          ],
+        },
       }),
       description: 'Publishes the built site from GitHub Actions',
     });

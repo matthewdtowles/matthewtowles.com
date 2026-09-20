@@ -10,4 +10,5 @@ new SiteStack(app, 'MatthewTowlesSite', {
   domainName: 'matthewtowles.com',
   hostedZoneId: 'Z01413571IK2KWZGDAL7I',
   githubRepo: 'matthewdtowles/matthewtowles.com',
+  githubRepoImmutable: 'matthewdtowles@16619682/matthewtowles.com@1377729545',
 });
