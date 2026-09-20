@@ -2,28 +2,19 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 
-const suites = (await getCollection('suites')).sort((a, b) => a.data.order - b.data.order);
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const standalone = projects.filter((p) => !p.data.suite);
 ---
 
 <Base title="Matthew Towles" description="Engineering portfolio.">
   <h1>Matthew Towles</h1>
 
-  <h2>Suites</h2>
-  <ul>
-    {suites.map((s) => (
-      <li>
-        <a href={`/suites/${s.id}/`}>{s.data.title}</a> — {s.data.tagline}
-      </li>
-    ))}
-  </ul>
-
   <h2>Projects</h2>
   <ul>
-    {standalone.map((p) => (
+    {projects.map((p) => (
       <li>
-        <a href={`/projects/${p.id}/`}>{p.data.title}</a> — {p.data.tagline}
+        <a href={`/projects/${p.id}/`}>{p.data.title}</a>
+        <p>{p.data.tagline}</p>
+        <p>{p.data.repos.length} {p.data.repos.length === 1 ? 'repository' : 'repositories'}</p>
       </li>
     ))}
   </ul>

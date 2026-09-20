@@ -12,7 +12,7 @@ const { Content } = await render(project);
 ---
 
 <Base title={project.data.title} description={project.data.tagline}>
-  <p><a href="/">← Home</a></p>
+  <p><a href="/">Back to home</a></p>
   <h1>{project.data.title}</h1>
   <p>{project.data.tagline}</p>
   <dl>
@@ -20,10 +20,31 @@ const { Content } = await render(project);
     <dt>Status</dt><dd>{project.data.status}</dd>
     <dt>Stack</dt><dd>{project.data.stack.join(', ')}</dd>
   </dl>
-  <ul>
-    {project.data.repo && <li><a href={project.data.repo}>Source</a></li>}
-    {project.data.liveUrl && <li><a href={project.data.liveUrl}>Live</a></li>}
-    {project.data.storeLinks.map((l) => <li><a href={l.url}>{l.platform}</a></li>)}
-  </ul>
+
   <Content />
+
+  {project.data.repos.length > 0 && (
+    <>
+      <h2>Repositories</h2>
+      <ul>
+        {project.data.repos.map((r) => (
+          <li>
+            <a href={r.url}>{r.name}</a>
+            {r.language && <span> ({r.language})</span>}
+            <p>{r.role}</p>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {(project.data.liveUrl || project.data.storeLinks.length > 0) && (
+    <>
+      <h2>Links</h2>
+      <ul>
+        {project.data.liveUrl && <li><a href={project.data.liveUrl}>Live site</a></li>}
+        {project.data.storeLinks.map((l) => <li><a href={l.url}>{l.platform}</a></li>)}
+      </ul>
+    </>
+  )}
 </Base>
