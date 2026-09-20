@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site, socials } from '../config/site';
+import { ogSlug } from '../config/og-slug.mjs';
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
 
 const { title, description = site.lede } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(`/og/${ogSlug(Astro.url.pathname)}.png`, Astro.site);
 const isHome = Astro.url.pathname === '/';
 
 // Ties the domain to the person, so a search for the name can surface the
@@ -35,7 +37,12 @@ const personSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
