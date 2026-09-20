@@ -464,3 +464,21 @@ code {
 .prose svg .cluster-label p {
   color: var(--ink-muted) !important;
 }
+
+/* Shiki emits these variables when the theme is css-variables, so code blocks
+   inherit the palette and follow light and dark with everything else. The
+   highlighting stays near monochrome: on a page whose code is mostly install
+   commands, color would be noise rather than information. */
+:root {
+  --astro-code-background: var(--surface);
+  --astro-code-foreground: var(--ink);
+  --astro-code-token-comment: var(--ink-faint);
+  --astro-code-token-punctuation: var(--ink-faint);
+  --astro-code-token-keyword: var(--accent);
+  --astro-code-token-function: var(--ink);
+  --astro-code-token-constant: var(--ink);
+  --astro-code-token-parameter: var(--ink);
+  --astro-code-token-string: var(--ink-muted);
+  --astro-code-token-string-expression: var(--ink-muted);
+  --astro-code-token-link: var(--accent);
+}

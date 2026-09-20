@@ -8,6 +8,12 @@ links:
   - label: Open the web app
     url: https://iwantmymtg.net
     type: website
+  - label: Get it on Google Play
+    url: https://play.google.com/store/apps/details?id=com.matthewdtowles.iwantmymtg
+    type: play-store
+  - label: Download on the App Store
+    url: https://apps.apple.com/us/app/i-want-my-mtg/id6784075307
+    type: app-store
   - label: Install the MCP server
     url: https://www.npmjs.com/package/iwantmymtg-mcp
     type: npm

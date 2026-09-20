@@ -18,6 +18,9 @@ export default defineConfig({
     // Shiki highlights fenced blocks before our rehype plugins see them, which
     // would turn a mermaid fence into markup instead of a diagram.
     syntaxHighlight: { type: 'shiki', excludeLangs: ['mermaid'] },
+    // Highlighting is driven by CSS variables so code blocks sit on the site
+    // palette and follow the theme, rather than carrying their own colors.
+    shikiConfig: { theme: 'css-variables' },
     // Satteri, the default processor, does not run rehype plugins, and Mermaid
     // renders as one.
     processor: unified({
