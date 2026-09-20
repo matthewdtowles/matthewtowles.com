@@ -27,6 +27,19 @@ const { Content } = await render(project);
     </>
   )}
 
+  {project.data.install.length > 0 && (
+    <>
+      <h2>Install</h2>
+      {project.data.install.map((i) => (
+        <div>
+          <h3>{i.platform}</h3>
+          <pre><code>{i.command}</code></pre>
+          {i.note && <p>{i.note}</p>}
+        </div>
+      ))}
+    </>
+  )}
+
   <Content />
 
   <h2>Details</h2>

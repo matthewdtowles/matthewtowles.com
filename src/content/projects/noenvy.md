@@ -5,9 +5,15 @@ status: active
 role: Sole engineer
 stack: [Go, Homebrew]
 links:
-  - label: Install with Homebrew
-    url: https://github.com/matthewdtowles/homebrew-tap
-    type: homebrew
+  - label: Full install guide for every platform
+    url: https://github.com/matthewdtowles/noenvy#install
+    type: docs
+install:
+  - platform: macOS
+    command: brew install matthewdtowles/tap/noenvy
+  - platform: Debian and Ubuntu
+    command: sudo apt install noenvy
+    note: After a one time repository setup. Every package is GPG verified end to end.
 repos:
   - name: noenvy
     url: https://github.com/matthewdtowles/noenvy

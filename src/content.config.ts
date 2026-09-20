@@ -13,7 +13,24 @@ const repo = z.object({
 const link = z.object({
   label: z.string(),
   url: z.string().url(),
-  type: z.enum(['website', 'app-store', 'play-store', 'npm', 'homebrew', 'mcp-registry', 'docs']),
+  type: z.enum([
+    'website',
+    'app-store',
+    'play-store',
+    'npm',
+    'homebrew',
+    'container-registry',
+    'mcp-registry',
+    'docs',
+  ]),
+});
+
+// Copy-pasteable install commands, rendered inline so a CLI project does not
+// send visitors to GitHub just to find out how to install it.
+const install = z.object({
+  platform: z.string(),
+  command: z.string(),
+  note: z.string().optional(),
 });
 
 const projects = defineCollection({
@@ -25,6 +42,7 @@ const projects = defineCollection({
     role: z.string(),
     stack: z.array(z.string()),
     links: z.array(link).default([]),
+    install: z.array(install).default([]),
     repos: z.array(repo).default([]),
     featured: z.boolean().default(false),
     order: z.number().default(100),
