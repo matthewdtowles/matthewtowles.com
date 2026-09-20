@@ -8,9 +8,12 @@ const repo = z.object({
   language: z.string().optional(),
 });
 
-const storeLink = z.object({
-  platform: z.enum(['app-store', 'play-store', 'npm', 'homebrew', 'mcp-registry']),
+// Where a visitor can actually use or install the thing. Ordered as authored,
+// so the most useful destination for a given project can be listed first.
+const link = z.object({
+  label: z.string(),
   url: z.string().url(),
+  type: z.enum(['website', 'app-store', 'play-store', 'npm', 'homebrew', 'mcp-registry', 'docs']),
 });
 
 const projects = defineCollection({
@@ -21,9 +24,8 @@ const projects = defineCollection({
     status: z.enum(['live', 'active', 'paused', 'archived']),
     role: z.string(),
     stack: z.array(z.string()),
+    links: z.array(link).default([]),
     repos: z.array(repo).default([]),
-    liveUrl: z.string().url().optional(),
-    storeLinks: z.array(storeLink).default([]),
     featured: z.boolean().default(false),
     order: z.number().default(100),
   }),

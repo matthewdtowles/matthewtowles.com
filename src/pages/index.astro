@@ -14,7 +14,9 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
       <li>
         <a href={`/projects/${p.id}/`}>{p.data.title}</a>
         <p>{p.data.tagline}</p>
-        <p>{p.data.repos.length} {p.data.repos.length === 1 ? 'repository' : 'repositories'}</p>
+        <ul>
+          {p.data.links.map((l) => <li><a href={l.url}>{l.label}</a></li>)}
+        </ul>
       </li>
     ))}
   </ul>

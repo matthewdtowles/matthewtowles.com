@@ -4,6 +4,10 @@ tagline: Encrypts your .env into a vault keyed by the OS keyring, then injects s
 status: active
 role: Sole engineer
 stack: [Go, Homebrew]
+links:
+  - label: Install with Homebrew
+    url: https://github.com/matthewdtowles/homebrew-tap
+    type: homebrew
 repos:
   - name: noenvy
     url: https://github.com/matthewdtowles/noenvy
