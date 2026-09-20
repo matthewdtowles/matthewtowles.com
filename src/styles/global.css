@@ -16,13 +16,18 @@
   --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
+  color-scheme: light;
+
   --measure: 68ch;
   --gutter: 2.75rem;
   --page: 62rem;
 }
 
+/* Dark applies when the system asks for it and the reader has not pinned
+   light, or when the reader has pinned dark outright. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
     --bg: #101215;
     --surface: #171a1f;
     --ink: #e8eaed;
@@ -34,6 +39,24 @@
     --status: #e0a93f;
     --status-soft: #2a2317;
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #101215;
+  --surface: #171a1f;
+  --ink: #e8eaed;
+  --ink-muted: #979da7;
+  --ink-faint: #6d737d;
+  --rule: #272b32;
+  --accent: #9aa0ff;
+  --accent-soft: #1c1f3d;
+  --status: #e0a93f;
+  --status-soft: #2a2317;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 *,
@@ -219,8 +242,21 @@ hr {
   font-size: 0.78rem;
 }
 
-.nav a { color: var(--ink-muted); }
-.nav a:hover { color: var(--accent); }
+.nav a,
+.nav button { color: var(--ink-muted); }
+
+.nav a:hover,
+.nav button:hover { color: var(--accent); }
+
+.nav button {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav button[hidden] { display: none; }
 
 .colophon {
   margin-top: 6rem;

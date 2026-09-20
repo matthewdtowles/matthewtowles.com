@@ -48,6 +48,7 @@ const personSchema = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script is:inline src="/theme.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -68,6 +69,7 @@ const personSchema = {
           <a href="/#work">Work</a>
           <a href="/resume/">Resume</a>
           <a href={`mailto:${site.email}`}>Contact</a>
+          <button type="button" data-theme-toggle hidden>Auto</button>
         </nav>
       </header>
 
