@@ -132,6 +132,9 @@ function handler(event) {
         },
       },
       errorResponses: [
+        // S3 answers a missing key with 403 rather than 404, because Origin
+        // Access Control does not carry s3:ListBucket. Both map to the page.
+        { httpStatus: 403, responseHttpStatus: 404, responsePagePath: '/404.html' },
         { httpStatus: 404, responseHttpStatus: 404, responsePagePath: '/404.html' },
       ],
     });
