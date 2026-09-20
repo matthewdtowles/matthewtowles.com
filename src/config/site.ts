@@ -16,4 +16,9 @@ export interface Social {
 // costs more than an absent one.
 export const socials: Social[] = [
   { label: 'GitHub', url: 'https://github.com/matthewdtowles', handle: 'matthewdtowles' },
+  {
+    label: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/matthewdtowles/',
+    handle: 'matthewdtowles',
+  },
 ];

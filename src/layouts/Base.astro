@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { site } from '../config/site';
+import { site, socials } from '../config/site';
 
 interface Props {
   title: string;
@@ -10,6 +10,18 @@ interface Props {
 const { title, description = site.lede } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const isHome = Astro.url.pathname === '/';
+
+// Ties the domain to the person, so a search for the name can surface the
+// profiles alongside it.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle: site.role,
+  url: Astro.site?.href,
+  email: `mailto:${site.email}`,
+  sameAs: socials.map((s) => s.url),
+};
 ---
 
 <html lang="en">
@@ -26,6 +38,7 @@ const isHome = Astro.url.pathname === '/';
     <meta name="twitter:card" content="summary" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
