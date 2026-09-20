@@ -101,7 +101,7 @@ Docker, Scry runs as a native binary invoked by cron, and both talk to the same
 PostgreSQL database.
 
 ```mermaid
-graph TB
+graph LR
   subgraph clients[Clients]
     BROWSER[Browser]
     PHONE[iOS and Android]
@@ -118,17 +118,17 @@ graph TB
     WEB --> PG
   end
 
-  subgraph external[External services]
+  subgraph services[External services]
+    SES[Amazon SES]
     STRIPE[Stripe billing]
-    SMTP[SMTP email]
     SCRYFALL[Scryfall images]
   end
 
   BROWSER --> WEB
   PHONE --> WEB
   AI --> WEB
+  WEB --> SES
   WEB --> STRIPE
-  WEB --> SMTP
   BROWSER --> SCRYFALL
 ```
 
