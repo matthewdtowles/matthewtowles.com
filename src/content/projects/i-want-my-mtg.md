@@ -1,7 +1,7 @@
 ---
 title: I Want My MTG
 tagline: "A collection tracker for Magic: The Gathering, spanning data ingestion, a web app, mobile clients, and an MCP server."
-status: active
+status: live
 role: Sole engineer
 stack: [NestJS, TypeScript, Rust, React Native, Expo, PostgreSQL, Docker, AWS Lightsail]
 links:
