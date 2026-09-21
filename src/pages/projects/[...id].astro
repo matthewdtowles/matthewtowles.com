@@ -40,6 +40,9 @@ const { data } = project;
           {data.install.map((i) => (
             <section class="install-target">
               <h3>{i.platform}</h3>
+              {i.link && (
+                <p class="install-link"><a href={i.link.url}>{i.link.label}</a></p>
+              )}
               {i.steps.map((step) => (
                 <div class="install-step">
                   {step.label && <p class="step-label">{step.label}</p>}

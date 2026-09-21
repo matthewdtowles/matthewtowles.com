@@ -35,6 +35,8 @@ const installStep = z.object({
 
 const install = z.object({
   platform: z.string(),
+  // For platforms where the install is a download rather than a command.
+  link: z.object({ label: z.string(), url: z.string().url() }).optional(),
   steps: z.array(installStep).default([]),
   note: z.string().optional(),
 });

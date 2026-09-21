@@ -14,10 +14,18 @@ links:
   - label: Download on the App Store
     url: https://apps.apple.com/us/app/i-want-my-mtg/id6784075307
     type: app-store
-  - label: Install the MCP server
+  - label: Install the MCP server for Claude Desktop
+    url: https://github.com/matthewdtowles/iwantmymtg-mcp/releases/latest/download/iwantmymtg-mcp.mcpb
+    type: mcp-registry
+  - label: Install the MCP server from npm
     url: https://www.npmjs.com/package/iwantmymtg-mcp
     type: npm
 install:
+  - platform: MCP server in Claude Desktop, the quick way
+    link:
+      label: Download iwantmymtg-mcp.mcpb
+      url: https://github.com/matthewdtowles/iwantmymtg-mcp/releases/latest/download/iwantmymtg-mcp.mcpb
+    note: A packaged extension. Claude Desktop installs it without any config file editing, and prompts for an optional API key during setup. Use the manual configuration below for Claude Code, Cursor, or any other client.
   - platform: MCP server in Claude Desktop, Claude Code, or Cursor
     steps:
       - label: Add this to your client's MCP configuration
