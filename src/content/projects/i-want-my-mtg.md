@@ -18,10 +18,37 @@ links:
     url: https://www.npmjs.com/package/iwantmymtg-mcp
     type: npm
 install:
-  - platform: MCP server
+  - platform: MCP server in Claude Desktop, Claude Code, or Cursor
     steps:
-      - command: npx iwantmymtg-mcp
-    note: Connects Claude Desktop, Claude Code, and other MCP clients to your collection.
+      - label: Add this to your client's MCP configuration
+        command: |-
+          {
+            "mcpServers": {
+              "iwmm": {
+                "command": "npx",
+                "args": ["-y", "iwantmymtg-mcp"],
+                "env": { "IWMM_API_KEY": "iwm_live_..." }
+              }
+            }
+          }
+      - label: Where that file lives, Claude Desktop
+        command: |-
+          macOS    ~/Library/Application Support/Claude/claude_desktop_config.json
+          Windows  %APPDATA%\Claude\claude_desktop_config.json
+      - label: Where that file lives, Claude Code
+        command: .mcp.json in your project, or ~/.claude/.mcp.json for every project
+      - label: Where that file lives, Cursor
+        command: .cursor/mcp.json in your project, or ~/.cursor/mcp.json for every project
+    note: The API key is optional. Card, set, and price lookups work without one, and a key adds the tools that read or change your own collection. Create a key at iwantmymtg.net/user/api-keys. Cursor needs a restart before iwmm shows up under Settings, Features, MCP Servers.
+  - platform: MCP server, run on its own
+    steps:
+      - label: Without installing anything
+        command: npx iwantmymtg-mcp
+      - label: Or install it globally
+        command: |-
+          npm install -g iwantmymtg-mcp
+          iwantmymtg-mcp
+    note: Requires Node 20 or newer.
   - platform: Scry ETL container
     steps:
       - command: docker pull ghcr.io/matthewdtowles/scry:latest
