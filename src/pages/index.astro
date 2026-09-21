@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { site, socials } from '../config/site';
+import { site, socials, about } from '../config/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -35,15 +35,18 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     </section>
 
     <section class="node">
-      <p class="eyebrow">Background</p>
-      <p>
-        Ten years building distributed systems, most recently leading event driven
-        integration and testing architecture at Travelers. Master's in computer
-        science from Georgia Tech.
-      </p>
-      <ul class="linkrow">
-        <li><a href="/resume/">Read the full resume</a></li>
-      </ul>
+      <p class="eyebrow">About</p>
+      <div class="about">
+        {about.photo && (
+          <img class="portrait" src={about.photo} alt={about.photoAlt} width="168" height="168" />
+        )}
+        <div>
+          {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <ul class="linkrow">
+            <li><a href="/resume/">Read the full resume</a></li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section class="node">

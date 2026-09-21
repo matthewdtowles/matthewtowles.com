@@ -540,3 +540,27 @@ code {
 .nav button[data-theme-toggle][data-state='dark'] .icon-dark {
   display: block;
 }
+
+/* About: the portrait sits beside the text on wide screens and above it on
+   narrow ones. With no portrait set the text simply fills the row. */
+.about {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.about > div { min-width: 0; }
+
+.portrait {
+  width: 10.5rem;
+  height: 10.5rem;
+  flex: none;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  filter: saturate(0.9);
+}
+
+@media (max-width: 40rem) {
+  .about { flex-direction: column; gap: 1.5rem; }
+  .portrait { width: 8rem; height: 8rem; }
+}
