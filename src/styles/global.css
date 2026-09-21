@@ -518,3 +518,25 @@ code {
   --astro-code-token-string-expression: var(--ink-muted);
   --astro-code-token-link: var(--accent);
 }
+
+/* The theme control shows one icon at a time: a half filled disc for auto,
+   a sun for light, a moon for dark. */
+.nav button[data-theme-toggle] {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding: 0.15rem;
+  margin: -0.15rem;
+}
+
+.nav button[data-theme-toggle] .icon {
+  width: 1rem;
+  height: 1rem;
+  display: none;
+}
+
+.nav button[data-theme-toggle][data-state='system'] .icon-system,
+.nav button[data-theme-toggle][data-state='light'] .icon-light,
+.nav button[data-theme-toggle][data-state='dark'] .icon-dark {
+  display: block;
+}

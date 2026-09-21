@@ -33,11 +33,12 @@
 
     function render() {
       var value = current();
-      button.textContent = value === 'system' ? 'Auto' : value === 'light' ? 'Light' : 'Dark';
+      button.setAttribute('data-state', value);
       button.setAttribute(
         'aria-label',
-        'Colour theme: ' + (value === 'system' ? 'follows your system' : value) + '. Change it.',
+        'Theme: ' + (value === 'system' ? 'auto, following your system' : value) + '. Change it.',
       );
+      button.setAttribute('title', 'Theme: ' + (value === 'system' ? 'auto' : value));
     }
 
     button.hidden = false;
