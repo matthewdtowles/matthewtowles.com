@@ -5,15 +5,54 @@ status: live
 role: Sole engineer
 stack: [Go, Homebrew]
 links:
-  - label: Full install guide for every platform
-    url: https://github.com/matthewdtowles/noenvy#install
+  - label: Download a release build
+    url: https://github.com/matthewdtowles/noenvy/releases/latest
     type: docs
 install:
-  - platform: macOS
-    command: brew install matthewdtowles/tap/noenvy
-  - platform: Debian and Ubuntu
-    command: sudo apt install noenvy
-    note: After a one time repository setup. Every package is GPG verified end to end.
+  - platform: macOS, with Homebrew
+    steps:
+      - command: brew install matthewdtowles/tap/noenvy
+    note: Homebrew clears the quarantine attribute for you, so there is no Gatekeeper prompt.
+  - platform: Debian, Ubuntu, Mint, Pop!_OS, and Kali, with apt
+    steps:
+      - label: Add the signed repository, once
+        command: |-
+          sudo install -d -m 0755 /etc/apt/keyrings
+          curl -fsSL https://matthewdtowles.github.io/noenvy/key.gpg \
+            | sudo gpg --dearmor -o /etc/apt/keyrings/noenvy.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/noenvy.gpg] https://matthewdtowles.github.io/noenvy stable main" \
+            | sudo tee /etc/apt/sources.list.d/noenvy.list
+          sudo apt update
+      - label: Install
+        command: sudo apt install noenvy
+      - label: Check the signing key before trusting it, if you want to
+        command: gpg --show-keys /etc/apt/keyrings/noenvy.gpg
+    note: "Expected fingerprint: EC78 1698 D374 74DB 88E2 1883 4443 9774 0341 265E. Later updates come through the usual sudo apt update and sudo apt upgrade noenvy."
+  - platform: Fedora, RHEL, CentOS, and Rocky, with rpm
+    steps:
+      - command: sudo rpm -i noenvy_*_linux_amd64.rpm
+    note: Download the package from the latest release first, and swap amd64 for arm64 on ARM. A signed dnf repository is on the roadmap.
+  - platform: Alpine, with apk
+    steps:
+      - command: sudo apk add --allow-untrusted noenvy_*_linux_amd64.apk
+    note: Download the package from the latest release first.
+  - platform: Windows
+    note: Download noenvy_*_windows_x86_64.zip from the latest release, extract it, and put noenvy.exe somewhere on your PATH.
+  - platform: Any other platform, direct binary
+    steps:
+      - label: Clear the quarantine bit on macOS, once
+        command: xattr -d com.apple.quarantine ./noenvy
+    note: Take the tarball or zip from the latest release, extract it, and move the binary onto your PATH. The macOS binary is unsigned, so Gatekeeper stops the first run until the quarantine attribute is removed.
+  - platform: From source
+    steps:
+      - label: With the Go toolchain
+        command: go install github.com/matthewdtowles/noenvy@latest
+      - label: Or from a clone
+        command: |-
+          git clone https://github.com/matthewdtowles/noenvy.git
+          cd noenvy
+          go build -o noenvy .
+    note: Requires Go 1.22 or newer.
 repos:
   - name: noenvy
     url: https://github.com/matthewdtowles/noenvy
@@ -110,9 +149,21 @@ with your login has your keyring. No local secrets tool solves that, and the
 README says so before it says anything about features.
 
 Platform support follows the same rule. The tool depends on an OS credential
-store, so it works on macOS, Windows, and Linux desktops running a Secret
-Service daemon, and it does not work on headless servers, containers, WSL2, or
-devcontainers. Those are listed as unsupported rather than quietly failing.
+store, so where there is no such store it is listed as unsupported rather than
+left to fail quietly at runtime.
+
+| Platform | Credential store | Supported |
+| --- | --- | --- |
+| macOS | Keychain | Yes |
+| Windows | Credential Manager | Yes |
+| Linux desktop | Secret Service, through gnome-keyring or KWallet | Yes, when the keyring daemon is running |
+| Headless Linux | None by default | No |
+| Docker containers | None by default | No |
+| WSL2 | None by default | No, unless you run a Secret Service implementation yourself |
+| Devcontainers and Codespaces | None by default | No |
+
+A passphrase protected file backend is on the roadmap for the headless and
+WSL2 cases.
 
 ## How it ships
 

@@ -564,3 +564,30 @@ code {
   .about { flex-direction: column; gap: 1.5rem; }
   .portrait { width: 8rem; height: 8rem; }
 }
+
+/* Install instructions: one block per platform, separated so a reader can find
+   their own and ignore the rest. */
+.install-target + .install-target {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.install-target h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin-bottom: 0.9rem;
+}
+
+.install-step + .install-step { margin-top: 0.9rem; }
+
+.step-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 0.4rem;
+}
+
+.install-target .meta { margin-top: 0.75rem; }

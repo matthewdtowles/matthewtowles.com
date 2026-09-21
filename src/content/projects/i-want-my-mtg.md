@@ -19,10 +19,12 @@ links:
     type: npm
 install:
   - platform: MCP server
-    command: npx iwantmymtg-mcp
+    steps:
+      - command: npx iwantmymtg-mcp
     note: Connects Claude Desktop, Claude Code, and other MCP clients to your collection.
   - platform: Scry ETL container
-    command: docker pull ghcr.io/matthewdtowles/scry:latest
+    steps:
+      - command: docker pull ghcr.io/matthewdtowles/scry:latest
     note: The ingestion pipeline, published on every release.
 repos:
   - name: i-want-my-mtg

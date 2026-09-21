@@ -25,11 +25,17 @@ const link = z.object({
   ]),
 });
 
-// Copy-pasteable install commands, rendered inline so a CLI project does not
-// send visitors to GitHub just to find out how to install it.
+// Copy-pasteable install instructions, rendered inline so a CLI project does
+// not send visitors to GitHub just to find out how to install it. Steps are
+// optional because some platforms are a download rather than a command.
+const installStep = z.object({
+  label: z.string().optional(),
+  command: z.string(),
+});
+
 const install = z.object({
   platform: z.string(),
-  command: z.string(),
+  steps: z.array(installStep).default([]),
   note: z.string().optional(),
 });
 

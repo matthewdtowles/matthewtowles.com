@@ -36,13 +36,20 @@ const { data } = project;
     {data.install.length > 0 && (
       <section class="node">
         <p class="eyebrow">Install</p>
-        {data.install.map((i) => (
-          <div style="margin-bottom: 1.5rem;">
-            <p class="stack" style="margin-bottom: 0.4rem;">{i.platform}</p>
-            <pre><code>{i.command}</code></pre>
-            {i.note && <p class="meta">{i.note}</p>}
-          </div>
-        ))}
+        <div class="install">
+          {data.install.map((i) => (
+            <section class="install-target">
+              <h3>{i.platform}</h3>
+              {i.steps.map((step) => (
+                <div class="install-step">
+                  {step.label && <p class="step-label">{step.label}</p>}
+                  <pre><code>{step.command}</code></pre>
+                </div>
+              ))}
+              {i.note && <p class="meta">{i.note}</p>}
+            </section>
+          ))}
+        </div>
       </section>
     )}
 
