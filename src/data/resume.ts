@@ -1,6 +1,6 @@
 // Deliberately excludes phone number and home city. This page is public.
 export const summary =
-  'Over 10 years designing resilient distributed architectures, event driven integrations, and automated testing ecosystems. History of building enterprise adopted developer tooling, security guardrails, and AI assisted SDLC work that eliminates configuration errors and protects transaction integrity.';
+  'Technical lead with over 10 years designing resilient distributed systems on AWS, including zero-loss, event-driven Kafka integrations that protect payment and billing integrity. I build developer tooling, security guardrails, and AI-assisted SDLC automation that teams across the enterprise adopt, eliminating configuration errors and speeding up delivery.';
 
 export interface Role {
   company: string;
