@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site, socials } from '../config/site';
-import { summary, roles, education, internalTools } from '../data/resume';
+import { summary, roles, education, certifications, internalTools } from '../data/resume';
 ---
 
 <Base title={`Resume, ${site.name}`} description={summary}>
@@ -54,6 +54,17 @@ import { summary, roles, education, internalTools } from '../data/resume';
         {education.map((e) => (
           <li>
             <strong>{e.school}.</strong> {e.credential}{e.year ? `, ${e.year}` : ''}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="node">
+      <p class="eyebrow">Certifications</p>
+      <ul>
+        {certifications.map((c) => (
+          <li>
+            <strong>{c.issuer}.</strong> <a href={c.url}>{c.name}</a>, {c.year}
           </li>
         ))}
       </ul>

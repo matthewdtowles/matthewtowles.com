@@ -100,6 +100,15 @@ export const education = [
   { school: 'Towson University', credential: 'B.S. Economics', year: '' },
 ];
 
+export const certifications = [
+  {
+    name: 'AWS Certified Solutions Architect, Associate',
+    issuer: 'Amazon Web Services',
+    year: '2026',
+    url: 'https://www.credly.com/badges/4dbcbb83-3dc9-486b-9b71-76baff6e9643/public_url',
+  },
+];
+
 // Internal tools built at Travelers outside assigned work. No public links exist,
 // so they are listed rather than linked.
 export const internalTools = [
