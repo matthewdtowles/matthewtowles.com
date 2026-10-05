@@ -18,37 +18,42 @@ export const roles: Role[] = [
     start: 'Oct 2021',
     end: 'Present',
     summary:
-      'Directing technical design, architectural modernization, and testing infrastructure for high impact event driven integrations with zero loss streaming.',
+      'Directing technical design, architectural modernization, and testing infrastructure for high-impact, event-driven integrations with zero-loss streaming.',
     highlights: [
       {
-        label: 'Zero loss streaming',
+        label: 'Enterprise eventing framework',
         detail:
-          'Ensured at least once sequenced delivery, preventing duplicate billing and payments across downstream systems with transactional outbox patterns and Kafka consumer algorithms.',
+          'Architected an internal Java SDK wrapping Spring Kafka for the Enterprise Eventing Framework, now the enterprise-wide standard across all organizations and active in production.',
       },
       {
-        label: 'Ledger algorithms',
+        label: 'Engineering practice and CI/CD modernization',
         detail:
-          'Engineered reconciliation and suspense accounting algorithms for Kafka consumers to safeguard payment workflows against silent processing errors.',
+          'Led a team transforming engineering standards for an org of teams on a major financial modernization project. Taught modularization and TDD, and unblocked a two-year deployment stall by establishing automated CI/CD pipelines, reaching production within 12 months.',
       },
       {
-        label: 'Core BI modernization',
+        label: 'Automated test infrastructure',
         detail:
-          'Led design of a data translation engine for legacy systems, ensuring continuity for business insurance operations.',
+          'Engineered a flexible, JSON-driven integration testing engine spanning local environments, GitHub Actions PR checks, and post-deployment AWS validation, catching regression defects before release.',
       },
       {
-        label: 'Enterprise test architecture',
+        label: 'Zero-loss data pipeline architecture',
         detail:
-          'Reduced regression defects and enabled environment promotions with automated integration testing via GitHub Actions.',
+          'Designed and implemented the core interoperability layer for Business Insurance modernization, translating transactions into Guidewire. Built deduplication, transactional outbox patterns, ordered suspense and blocking logic, and self-healing recovery engines to guarantee zero-loss delivery.',
       },
       {
-        label: 'AI platform engineering',
+        label: 'Delinquency and cancellation streaming',
         detail:
-          'Built an internal Claude plugin automating Jira story creation and code reviews, with safety guardrails across the SDLC.',
+          'Extended the event-driven pipeline architecture to handle complex cancellation and rescindment workflows between Guidewire and legacy systems, with audit-ready transaction tracking.',
       },
       {
-        label: 'Containerization fix',
+        label: 'AI-assisted SDLC automation',
         detail:
-          'Resolved critical Docker containerization flaws for Node during migration, then worked with leadership to roll the fix out across the organization.',
+          'Led the AI initiative automating the full SDLC, from Jira epic and story generation with enforced quality gates to adversarial automated PR code reviews.',
+      },
+      {
+        label: 'Build optimization and containerization fix',
+        detail:
+          'Identified and resolved a systemic Docker base image build bottleneck during an org-wide migration, cutting team build times by 50%, then consulted across Business Insurance to unblock the enterprise move to the new images.',
       },
     ],
   },
@@ -115,16 +120,16 @@ export const internalTools = [
   {
     name: 'decant',
     detail:
-      'CLI that localizes, encrypts, and injects runtime secrets, eliminating the risk of exposing them in a project.',
+      'CLI that localizes, encrypts, and injects runtime secrets, eliminating the risk of exposing them in a project. Ships with a skill for use with Claude.',
   },
   {
     name: 'tfctl',
     detail:
-      'CLI automating Terraform Enterprise workspace synchronization, cutting hours from pipeline setup.',
+      'CLI automating Terraform Enterprise workspace synchronization, reducing errors and cutting hours from pipeline setup.',
   },
   {
     name: 'BI program dashboard MCP server',
     detail:
-      'MCP server on AWS EKS exposing a Jira dashboard backend API through machine to machine auth with Okta, enabling automated report emails to engineers.',
+      'MCP server on AWS EKS that queries an internal API through machine-to-machine auth with Okta, enabling automated custom report emails to engineers.',
   },
 ];

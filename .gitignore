@@ -26,3 +26,6 @@ pnpm-debug.log*
 # cdk
 infra/cdk.out/
 infra/node_modules/
+
+# source resume (has phone number and home city; the site publishes a redacted version)
+/RESUME-*.pdf
