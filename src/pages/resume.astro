@@ -1,7 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { site, socials } from '../config/site';
 import { summary, roles, education, certifications, internalTools } from '../data/resume';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Base title={`Resume, ${site.name}`} description={summary}>
@@ -44,6 +47,18 @@ import { summary, roles, education, certifications, internalTools } from '../dat
       <ul>
         {internalTools.map((t) => (
           <li><strong>{t.name}.</strong> {t.detail}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="node">
+      <p class="eyebrow">Projects</p>
+      <ul>
+        {projects.map((p) => (
+          <li>
+            <strong><a href={`/projects/${p.id}/`}>{p.data.title}</a>.</strong> {p.data.tagline}
+            {p.data.links[0] && <> <a href={p.data.links[0].url}>{p.data.links[0].label}</a>.</>}
+          </li>
         ))}
       </ul>
     </section>
