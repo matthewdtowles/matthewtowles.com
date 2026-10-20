@@ -1,6 +1,23 @@
 // Deliberately excludes phone number and home city. This page is public.
 export const summary =
-  'Technical lead with over 10 years designing resilient distributed systems on AWS, including zero-loss, event-driven Kafka integrations that protect payment and billing integrity. I build developer tooling, security guardrails, and AI-assisted SDLC automation that teams across the enterprise adopt, eliminating configuration errors and speeding up delivery.';
+  'Senior software engineer and technical lead with over 10 years designing resilient distributed systems on AWS, including zero-loss, event-driven Kafka integrations that protect payment and billing integrity. I build developer tooling, security guardrails, and AI-assisted SDLC automation that teams across the enterprise adopt, eliminating configuration errors and speeding up delivery.';
+
+export const skills = [
+  {
+    area: 'Languages and frameworks',
+    items: 'Java (Spring Boot), TypeScript (NestJS, React Native/Expo), Rust, Python, SQL',
+  },
+  {
+    area: 'Streaming and data',
+    items:
+      'Apache Kafka, Spring Kafka, event-driven architecture, transactional outbox, PostgreSQL, DynamoDB, Elasticsearch',
+  },
+  {
+    area: 'Cloud and delivery',
+    items:
+      'AWS (Lambda, API Gateway, S3, CloudFront, EKS), AWS CDK, Terraform, Docker, Kubernetes, GitHub Actions',
+  },
+];
 
 export interface Role {
   company: string;
@@ -14,36 +31,29 @@ export interface Role {
 export const roles: Role[] = [
   {
     company: 'Travelers Insurance',
-    title: 'Software Engineer II, Technical Lead',
+    title: 'Technical Lead (Software Engineer II)',
     start: 'Oct 2021',
     end: 'Present',
-    summary:
-      'Directing technical design, architectural modernization, and testing infrastructure for high-impact, event-driven integrations with zero-loss streaming.',
     highlights: [
+      {
+        label: 'Top performer',
+        detail:
+          'Rated Exceptional in 2025, Travelers’ rarely given top performance rating, and promoted to Software Engineer II.',
+      },
       {
         label: 'Enterprise eventing framework',
         detail:
           'Architected an internal Java SDK wrapping Spring Kafka for the Enterprise Eventing Framework, now the enterprise-wide standard across all organizations and active in production.',
       },
       {
-        label: 'Engineering practice and CI/CD modernization',
-        detail:
-          'Led a team transforming engineering standards for an org of teams on a major financial modernization project. Taught modularization and TDD, and unblocked a two-year deployment stall by establishing automated CI/CD pipelines, reaching production within 12 months.',
-      },
-      {
-        label: 'Automated test infrastructure',
-        detail:
-          'Engineered a flexible, JSON-driven integration testing engine spanning local environments, GitHub Actions PR checks, and post-deployment AWS validation, catching regression defects before release.',
-      },
-      {
         label: 'Zero-loss data pipeline architecture',
         detail:
-          'Designed and implemented the core interoperability layer for Business Insurance modernization, translating transactions into Guidewire. Built deduplication, transactional outbox patterns, ordered suspense and blocking logic, and self-healing recovery engines to guarantee zero-loss delivery.',
+          'Designed and built the core interoperability layer for Business Insurance modernization, translating transactions into Guidewire. Built deduplication, transactional outbox patterns, ordered suspense and blocking logic, and self-healing recovery engines to guarantee zero-loss delivery, then extended it to complex delinquency, cancellation, and rescindment workflows between Guidewire and legacy systems, with audit-ready transaction tracking.',
       },
       {
-        label: 'Delinquency and cancellation streaming',
+        label: 'Engineering practice and CI/CD modernization',
         detail:
-          'Extended the event-driven pipeline architecture to handle complex cancellation and rescindment workflows between Guidewire and legacy systems, with audit-ready transaction tracking.',
+          'Led a team transforming engineering standards for an org of teams on a major financial modernization project. Taught modularization and TDD, and ended a two-year deployment stall by establishing automated CI/CD pipelines, reaching production within 12 months. Unblocked the org-wide Docker base image migration by fixing private npm registry auth in the new template, halving team build times.',
       },
       {
         label: 'AI-assisted SDLC automation',
@@ -51,9 +61,9 @@ export const roles: Role[] = [
           'Led the AI initiative automating the full SDLC, from Jira epic and story generation with enforced quality gates to adversarial automated PR code reviews.',
       },
       {
-        label: 'Build optimization and containerization fix',
+        label: 'Integration test platform',
         detail:
-          'Identified and resolved a systemic Docker base image build bottleneck during an org-wide migration, cutting team build times by 50%, then consulted across Business Insurance to unblock the enterprise move to the new images.',
+          'Engineered a flexible, JSON-driven integration testing engine spanning local environments, GitHub Actions PR checks, and post-deployment AWS validation, catching regression defects before release.',
       },
     ],
   },
