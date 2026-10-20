@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { site, socials } from '../config/site';
-import { summary, roles, education, certifications, internalTools } from '../data/resume';
+import { summary, skills, roles, education, certifications, internalTools } from '../data/resume';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -41,7 +41,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     <section class="node">
       <p class="eyebrow">Internal tooling</p>
       <p>
-        Built at Travelers outside assigned work, as sole contributor. These are internal, so there is
+        Built at Travelers on my own initiative, outside assigned work. These are internal, so there is
         nothing public to link.
       </p>
       <ul>
@@ -59,6 +59,15 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
             <strong><a href={`/projects/${p.id}/`}>{p.data.title}</a>.</strong> {p.data.tagline}
             {p.data.links[0] && <> <a href={p.data.links[0].url}>{p.data.links[0].label}</a>.</>}
           </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="node">
+      <p class="eyebrow">Skills</p>
+      <ul>
+        {skills.map((s) => (
+          <li><strong>{s.area}.</strong> {s.items}</li>
         ))}
       </ul>
     </section>
